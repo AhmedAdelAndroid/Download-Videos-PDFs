@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity(),ClickDownload {
         val dialogProgress = ProgressDialog(this)
         dialogProgress.setTitle("Download...")
         dialogProgress.setMessage("Preparing...")
-        dialogProgress.setCancelable(false)
+//        dialogProgress.setCancelable(false)
         dialogProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
        /* dialogProgress.setButton(DialogInterface.BUTTON_NEGATIVE,"Cancel",
             DialogInterface.OnClickListener{dialogProgress,which->
@@ -153,6 +153,8 @@ class MainActivity : AppCompatActivity(),ClickDownload {
                 }
                 override fun onError(error: com.downloader.Error?) {
                     Toast.makeText(this@MainActivity,"Download Error",Toast.LENGTH_SHORT).show()
+                    dialogProgress.dismiss()
+
                 }
 
             })
