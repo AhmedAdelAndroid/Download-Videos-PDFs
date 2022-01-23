@@ -112,15 +112,15 @@ class MainActivity : AppCompatActivity(),ClickDownload {
         val dialogProgress = ProgressDialog(this)
         dialogProgress.setTitle("Download...")
         dialogProgress.setMessage("Preparing...")
-//        dialogProgress.setCancelable(false)
+        dialogProgress.setCancelable(false)
         dialogProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
-       /* dialogProgress.setButton(DialogInterface.BUTTON_NEGATIVE,"Cancel",
+      /*  dialogProgress.setButton(DialogInterface.BUTTON_NEGATIVE,"Cancel",
             DialogInterface.OnClickListener{dialogProgress,which->
 
                 dialogProgress.dismiss()
                 PRDownloader.cancel(downloadId)
-            })*/
-        dialogProgress.show()
+            })
+        dialogProgress.show()*/
 
         // Enabling database for resume support even after the application is killed:
         val config = PRDownloaderConfig.newBuilder()
@@ -129,14 +129,14 @@ class MainActivity : AppCompatActivity(),ClickDownload {
         PRDownloader.initialize(applicationContext, config)
 
 
-        downloadId = PRDownloader.download(url, directory(), fileName(url))
+       downloadId = PRDownloader.download(url, directory(), fileName(url))
             .build()
             .setOnStartOrResumeListener {
                 dialogProgress.setTitle("Download Started...")
             }
             .setOnPauseListener { }
             .setOnCancelListener {
-        //        Toast.makeText(this,"Download Canceled",Toast.LENGTH_SHORT).show()
+      //          Toast.makeText(this,"Download Canceled",Toast.LENGTH_SHORT).show()
             }
             .setOnProgressListener {
 
@@ -152,6 +152,7 @@ class MainActivity : AppCompatActivity(),ClickDownload {
                     dialogProgress.dismiss()
                 }
                 override fun onError(error: com.downloader.Error?) {
+                    PRDownloader.cancel(downloadId)
                     Toast.makeText(this@MainActivity,"Download Error",Toast.LENGTH_SHORT).show()
                     dialogProgress.dismiss()
 
